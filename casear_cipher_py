@@ -1,0 +1,51 @@
+def caesar_cipher(text, shift, mode):
+    """
+    Function to encrypt or decrypt text using Caesar Cipher.
+    
+    Parameters:
+    - text: The string to be encrypted or decrypted.
+    - shift: The number of positions each letter in the text should be shifted.
+    - mode: 'encrypt' to encrypt the text, 'decrypt' to decrypt the text.
+    
+    Returns:
+    - The encrypted or decrypted string.
+    """
+    result = []
+    for char in text:
+        if char.isalpha():  # Check if the character is a letter
+            start = ord('A') if char.isupper() else ord('a')
+            # Calculate the new position within the alphabet
+            new_char = chr((ord(char) - start + shift) % 26 + start)
+            result.append(new_char)
+        else:
+            result.append(char)  # Non-alphabet characters remain unchanged
+    
+    return ''.join(result)
+
+# Main program
+if __name__ == "__main__":
+    while True:
+        print("\n=== Caesar Cipher ===")
+        print("1. Encrypt")
+        print("2. Decrypt")
+        print("3. Exit")
+        choice = input("Enter your choice (1, 2, or 3): ")
+
+        if choice == '1':  # Encrypt
+            message = input("Enter message to encrypt: ")
+            shift = int(input("Enter the shift value (a number): "))
+            encrypted_message = caesar_cipher(message, shift, 'encrypt')
+            print(f"Encrypted message: {encrypted_message}")
+
+        elif choice == '2':  # Decrypt
+            message = input("Enter message to decrypt: ")
+            shift = int(input("Enter the shift value (a number): "))
+            decrypted_message = caesar_cipher(message, shift, 'decrypt')
+            print(f"Decrypted message: {decrypted_message}")
+
+        elif choice == '3':  # Exit
+            print("Exiting the program. Goodbye!")
+            break
+
+        else:
+            print("Invalid choice. Please enter 1, 2, or 3.")
